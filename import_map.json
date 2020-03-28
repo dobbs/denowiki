@@ -1,6 +1,7 @@
 {
     "imports": {
         "std/": "https://deno.land/std@v0.39.0/",
-        "seran/": "./server/"
+        "seran/": "./server/",
+        "turtle/": "http://turtle.simple.localtest.me/assets/turtle/"
     }
 }

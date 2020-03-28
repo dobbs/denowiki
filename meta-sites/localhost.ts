@@ -3,7 +3,7 @@ import * as wiki from "seran/wiki.ts";
 import { Request } from "seran/wiki.ts";
 import { System, MetaSite } from "seran/system.ts";
 
-export let plugins = ["/client/wander.mjs"]
+export let plugins = ["/client/wander.mjs", "/client/turtle.mjs"]
 
 async function readDir(path) {
   let fileInfo = await stat(path);
@@ -69,7 +69,10 @@ export async function serve(req: Request, system: System) {
   } else if (req.url == "/wander.json") {
     wiki.serveJson(
       req,
-      wiki.page("Wander", [wiki.item("turtle-wander", {})])
+      wiki.page("Wander", [
+        wiki.item("turtle-wander", {}),
+        wiki.item("turtle", {})
+      ])
     );
   } else if (metaPages[req.url]) {
     // These are meta-pages from the meta-pages folder
