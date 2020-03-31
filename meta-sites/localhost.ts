@@ -103,11 +103,12 @@ export async function serve(req: Request, system: System) {
       page
     );
   } else if (req.url == "/wander.json") {
+    console.log({turtles: Object.keys(turtle)});
     wiki.serveJson(
       req,
       wiki.page("Wander", [
         wiki.item("turtle-wander", {}),
-        wiki.item("turtle", turtle.saved)
+        ...(Object.entries(turtle).map(([_, it]) => wiki.item("turtle", it)))
       ])
     );
   } else if (metaPages[req.url]) {

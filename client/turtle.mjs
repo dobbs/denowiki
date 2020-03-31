@@ -1,15 +1,24 @@
 import {TurtleCanvas} from 'http://turtle.simple.localtest.me/assets/turtle/turtle-canvas.js';
 
+// don't like having render(json) and json() need to know to ask
+// this for the turtle, to get the history. demeter violation and also
+// asking instead of telling
 export class Turtle extends TurtleCanvas {
   connectedCallback() {
     this.draw();
   }
   render(json) {
+    console.log({where:'render', json});
     this.id = json.id;
-    this.text = "Turtle wants to be here";
-    this.turn().move().turn().nextMovesize().move();
-    this.history = this.turtle.history;
-    this.save();
+    if (! this.text) {
+      this.text = "Turtle wants to be here";
+    }
+    if (this.turtle.history.length === 0) {
+      this.turn().move().turn().nextMovesize().move();
+      this.save();
+    } else {
+      this.turtle._history = json.history
+    }
   }
 
   get json() {
@@ -17,7 +26,7 @@ export class Turtle extends TurtleCanvas {
       id: this.id,
       type: "turtle",
       text: this.text,
-      history: this.history
+      history: [...this.turtle.history]
     }
   }
 
