@@ -48,7 +48,12 @@ export class TurtleWander extends HTMLElement {
     turtlespace.update_ui(shadow);
   }
 
-  render(json) {
+  set json(json) {
+    console.log({where:'TurtleWander set json', json})
+  }
+
+  get json() {
+    return {}
   }
 }
 registerPlugin("turtle-wander", TurtleWander);

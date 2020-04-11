@@ -7,8 +7,8 @@ export class Turtle extends TurtleCanvas {
   connectedCallback() {
     this.draw();
   }
-  render(json) {
-    console.log({where:'render', json});
+  set json(json) {
+    console.log({where:'Turtle set json', json});
     this.id = json.id;
     if (! this.text) {
       this.text = "Turtle wants to be here";
@@ -22,6 +22,7 @@ export class Turtle extends TurtleCanvas {
   }
 
   get json() {
+    console.log({where: 'Turtle get json'});
     return {
       id: this.id,
       type: "turtle",
